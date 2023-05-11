@@ -28,7 +28,7 @@ router.post("/login", async (req, res) => {
         const bytes  = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
         const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
 
-        originalPassword != res.body.password &&
+        originalPassword !== req.body.password &&
             res.status(401).json("Wrong Password or Username!");
 
         const {password, ...info} = user._doc;
